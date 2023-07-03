@@ -9,6 +9,7 @@ const product = {
 };
 const getProductsItems = {
     schema: {
+        tags: ["products"],
         response: {
             200: {
                 type: "array",
@@ -20,6 +21,13 @@ const getProductsItems = {
 };
 const getOneProductItems = {
     schema: {
+        tags: ["products"],
+        params: {
+            type: "object",
+            properties: {
+                id: { type: "string", description: "the id of product" },
+            },
+        },
         response: {
             201: product,
         },

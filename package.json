@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fastify/swagger": "^8.6.0",
+    "@fastify/swagger-ui": "^1.9.2",
     "fastify": "^4.19.1"
   },
-  "type":"module"
+  "type": "module"
 }
