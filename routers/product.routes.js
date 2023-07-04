@@ -22,6 +22,8 @@ const getProductsItems = {
 const getOneProductItems = {
     schema: {
         tags: ["products"],
+        security: [{ apiKey: [] }],
+        summary:"anything can be written here",
         params: {
             type: "object",
             properties: {
