@@ -1,36 +1,39 @@
 import Fastify from "fastify";
-import productRoutes from "./routers/product.routes.js";
-import indexRoute from "./routers/index.routes.js";
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUi from "@fastify/swagger-ui";
-import {
-    fastifySwaggerConfig,
-    fastifySwaggerUIConfig,
-} from "./config/swagger.config.js";
 import "./config/sequeliza.config.js";
-import dotenv from "dotenv";
+import cors from "cors";
+import {
+    fastifySwaggerConfig, fastifySwaggerUiConfig,
+} from "./config/swagger.config.js";
+import indexRoute from "./routers/index.routes.js";
+import productRoutes from "./routers/product.routes.js";
+import authRouters from "./routers/auth.routes.js";
+import fastifyBcrypt from "fastify-bcrypt";
 
-const PORT = process.env.PORT || 5000;
-const fastify = Fastify({ logger: true });
-dotenv.config();
-
-fastify.register(fastifySwagger, fastifySwaggerConfig);
-fastify.register(fastifySwaggerUi, fastifySwaggerUIConfig);
-fastify.register(indexRoute);
-fastify.register(productRoutes, { prefix: "/products" });
-
+export const fastify = Fastify({
+    logger: true,
+});
+const PORT = 5000;
 const main = async () => {
+    fastify.register(fastifyBcrypt , {
+        saltWorkFactor:12
+    })
+    fastify.register(fastifySwagger, fastifySwaggerConfig);
+    fastify.register(fastifySwaggerUi, fastifySwaggerUiConfig);
+    // fastify.use(cors());
+    fastify.register(indexRoute);
+    fastify.register(authRouters, { prefix: "auth" });
+    fastify.register(productRoutes, { prefix: "/products" });
+
     fastify.listen(
         {
             port: PORT,
         },
         (err) => {
             if (err) console.log(err);
-            console.log(
-                `server is running on port ${fastify.server.address().port}`
-            );
+            console.log(`server run on port ${fastify.server.address().port}`);
         }
     );
 };
-
 main();

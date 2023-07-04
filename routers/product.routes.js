@@ -13,7 +13,7 @@ const getProductsItems = {
         response: {
             200: {
                 type: "array",
-                items: product,
+                // items: product,
             },
         },
     },
@@ -23,7 +23,7 @@ const getOneProductItems = {
     schema: {
         tags: ["products"],
         security: [{ apiKey: [] }],
-        summary:"anything can be written here",
+        summary: "anything can be written here",
         params: {
             type: "object",
             properties: {

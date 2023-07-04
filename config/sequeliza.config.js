@@ -8,6 +8,6 @@ export const sequelize = new Sequelize(
 
 export const DBConnection = async () => {
     await sequelize.authenticate();
-    console.log("connection is connected");
+    console.log("DB is connected");
 };
 DBConnection()

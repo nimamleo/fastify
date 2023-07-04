@@ -1,28 +1,30 @@
 export const fastifySwaggerConfig = {
     swagger: {
         info: {
-            title: "fastify swagger",
-            description: "swagger docs on py prj",
-            version: "0.1.0",
+            title: "fastify Swagger",
+            description: "swagger: documentation of my application",
+            version: "0.1.0"
         },
         tags: [
-            {
-                name: "products",
-                description: "admin can write and read product",
-            },
+            {name: "authentication", description: "all access"},
+            // {name: "user", description: "user can read & write (profile)"},
+            // {name: "Category", description: "admin can read & write and all roles can read (categories)"},
+            {name: "products", description: "admin can write and user can read (products)"},
         ],
-        host: "http://localhost:5000",
-        schemes: ["http"],
+        schemes: ['http'],
+        consumes: ['application/json', 'application/x-www-urlencoded'],
         securityDefinitions: {
-            apiKey: { type: "apiKey", in: "header", name: "authorization" },
-        },
-        security: [{ apiKey: [] }],
+            apiKey: {
+                type: "apiKey",
+                in: "header",
+                name: "authorization"
+            }
+        }
+
     },
-};
+}
 
-
-
-export const fastifySwaggerUIConfig = {
+export const fastifySwaggerUiConfig = {
     prefix: "swagger",
     exposeRoute: true,
 }
