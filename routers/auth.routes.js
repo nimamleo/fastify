@@ -44,11 +44,7 @@ const loginRoute = {
                 },
             },
         },
-        response: {
-            200: {
-                type: "object",
-            },
-        },
+        
     },
     handler: loginHandler,
 };

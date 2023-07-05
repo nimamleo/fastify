@@ -12,6 +12,7 @@ User.init(
         password: { type: DataTypes.STRING, allowNull: false },
         avtive: { type: DataTypes.BOOLEAN, defaultValue: false },
         birthday: { type: DataTypes.DATE },
+        token: { type: DataTypes.STRING, defaultValue: "" },
     },
     { sequelize, name: "user" }
 );

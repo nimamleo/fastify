@@ -10,6 +10,7 @@ import indexRoute from "./routers/index.routes.js";
 import productRoutes from "./routers/product.routes.js";
 import authRouters from "./routers/auth.routes.js";
 import fastifyBcrypt from "fastify-bcrypt";
+import fastifyJwt from "@fastify/jwt";
 
 export const fastify = Fastify({
     logger: true,
@@ -18,6 +19,9 @@ const PORT = 5000;
 const main = async () => {
     fastify.register(fastifyBcrypt , {
         saltWorkFactor:12
+    })
+    fastify.register(fastifyJwt , {
+        secret:"secret"
     })
     fastify.register(fastifySwagger, fastifySwaggerConfig);
     fastify.register(fastifySwaggerUi, fastifySwaggerUiConfig);
