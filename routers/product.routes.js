@@ -1,4 +1,5 @@
 import { getOneProduct, getAllProducts } from "../handlers/product.handler.js";
+import { GetUserMidlleware } from "../utils/get-user.js";
 
 const product = {
     type: "object",
@@ -13,12 +14,22 @@ const getProductsItems = {
         security: [{ apiKey: [] }],
         response: {
             200: {
-                type: "array",
-                // items: product,
+                type: "object",
+                properties: {
+                    products: { type: "array" },
+                    user: {
+                        type: "object",
+                        properties: {
+                            id: { type: "string" },
+                            username: { type: "string" },
+                        },
+                    },
+                },
             },
         },
     },
     handler: getAllProducts,
+    preHandler: [GetUserMidlleware],
 };
 const getOneProductItems = {
     schema: {
@@ -36,10 +47,11 @@ const getOneProductItems = {
         },
     },
     handler: getOneProduct,
+    preHandler: [GetUserMidlleware],
 };
 
 export default function productRoutes(fastify, options, done) {
-    fastify.addHook("onRequest", (request) => request.jwtVerify());
+    // fastify.addHook("onRequest", (request) => request.jwtVerify());
     fastify.get("/", getProductsItems);
     fastify.get("/:id", getOneProductItems);
     done();

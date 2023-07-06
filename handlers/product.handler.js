@@ -8,5 +8,5 @@ export const getOneProduct = (req, reply) => {
 };
 
 export const getAllProducts = (req, reply) => {
-    reply.send(products);
+    reply.send({ products, user: req.user });
 };
